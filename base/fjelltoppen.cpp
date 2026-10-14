@@ -83,6 +83,14 @@ static Common::String nativePath(const Common::FSNode &node) {
 
 // Config, saves and copied game data
 static Common::Path appDataDir() {
+#if defined(MACOSX) || defined(POSIX)
+	if (ConfMan.hasKey("app_data_path", Common::ConfigManager::kApplicationDomain)) {
+		Common::Path dir = ConfMan.getPath("app_data_path", Common::ConfigManager::kApplicationDomain);
+		if (!dir.toString(Common::Path::kNativeSeparator).hasPrefix("/"))
+			error("Fjelltoppen: app_data_path must be an absolute path");
+		return dir;
+	}
+#endif
 #if defined(WIN32)
 	// The backend's folder, named after the application in this build
 	TCHAR dir[MAX_PATH];
@@ -270,7 +278,7 @@ struct CopyJob {
 	Common::Path dst;
 };
 
-// Files already copied (same size) are skipped, so a cancelled copy resumes.
+// Existing files are checked against the source before a cancelled copy resumes.
 static void listCopyJobs(const Source &source, const Common::Path &dst, Common::Array<CopyJob> &jobs, uint64 &total) {
 	for (const char *dir : kGameDirs) {
 		if (!source.hasDir(dir))
@@ -283,14 +291,6 @@ static void listCopyJobs(const Source &source, const Common::Path &dst, Common::
 			job.file = file;
 			job.dst = dst.join(Common::Path(file.path, '/'));
 
-			Common::FSNode copy(job.dst);
-			if (copy.exists()) {
-				Common::SeekableReadStream *old = copy.createReadStream();
-				bool copied = old && old->size() == file.size;
-				delete old;
-				if (copied)
-					continue;
-			}
 			jobs.push_back(job);
 			total += file.size;
 		}
@@ -319,14 +319,18 @@ private:
 	enum { kCancelCmd = 'CANC', kBufferSize = 256 * 1024 };
 
 	void finish(int result);
+	bool startCopy(const CopyJob &job);
 
 	const Common::Array<CopyJob> &_jobs;
 	uint64 _total;
 	uint64 _done = 0;
+	uint32 _furthest = 0;
 	uint _next = 0;
 	Common::SeekableReadStream *_in = nullptr;
+	Common::SeekableReadStream *_old = nullptr;
 	Common::SeekableWriteStream *_out = nullptr;
 	byte *_buffer;
+	byte *_compareBuffer;
 	Common::String _failedFile;
 	bool _shot = false;
 
@@ -339,6 +343,7 @@ private:
 CopyDialog::CopyDialog(const Common::Array<CopyJob> &jobs, uint64 total)
 	: GUI::Dialog(0, 0, 1, 1), _jobs(jobs), _total(total) {
 	_buffer = new byte[kBufferSize];
+	_compareBuffer = new byte[kBufferSize];
 	_title = new GUI::StaticTextWidget(this, 0, 0, 1, 1, text("Kopierer spilldataene …"), Graphics::kTextAlignLeft);
 	_file = new GUI::StaticTextWidget(this, 0, 0, 1, 1, Common::U32String(), Graphics::kTextAlignLeft,
 	                                  Common::U32String(), GUI::ThemeEngine::kFontStyleNormal);
@@ -352,8 +357,10 @@ CopyDialog::CopyDialog(const Common::Array<CopyJob> &jobs, uint64 total)
 
 CopyDialog::~CopyDialog() {
 	delete _in;
+	delete _old;
 	delete _out;
 	delete[] _buffer;
+	delete[] _compareBuffer;
 }
 
 void CopyDialog::reflowLayout() {
@@ -386,11 +393,20 @@ void CopyDialog::reflowLayout() {
 
 void CopyDialog::finish(int result) {
 	delete _in;
+	delete _old;
 	delete _out;
 	_in = nullptr;
+	_old = nullptr;
 	_out = nullptr;
 	setResult(result);
 	close();
+}
+
+bool CopyDialog::startCopy(const CopyJob &job) {
+	if (!makeDirs(job.dst.getParent()))
+		return false;
+	_out = Common::FSNode(job.dst).createWriteStream(false);
+	return _out != nullptr;
 }
 
 void CopyDialog::handleTickle() {
@@ -404,39 +420,75 @@ void CopyDialog::handleTickle() {
 			const CopyJob &job = _jobs[_next++];
 			_file->setLabel(Common::U32String(job.file.path));
 			_in = job.source->open(job.file);
-			if (makeDirs(job.dst.getParent()))
-				_out = Common::FSNode(job.dst).createWriteStream(false);
-			if (!_in || !_out) {
+			if (!_in || _in->size() != job.file.size) {
+				_failedFile = job.file.path;
+				finish(kCopyFailed);
+				return;
+			}
+			Common::FSNode copy(job.dst);
+			if (copy.exists())
+				_old = copy.createReadStream();
+			if (_old && _old->size() != job.file.size) {
+				delete _old;
+				_old = nullptr;
+			}
+			if (!_old && !startCopy(job)) {
 				_failedFile = job.file.path;
 				finish(kCopyFailed);
 				return;
 			}
 		}
 
-		uint32 n = _in->read(_buffer, kBufferSize);
-		if (_in->err() || (n && _out->write(_buffer, n) != n)) {
-			_failedFile = _jobs[_next - 1].file.path;
+		const CopyJob &job = _jobs[_next - 1];
+		uint32 wanted = MIN<uint32>(kBufferSize, job.file.size - (uint32)_in->pos());
+		uint32 n = _in->read(_buffer, wanted);
+		if (_in->err() || n != wanted) {
+			_failedFile = job.file.path;
 			finish(kCopyFailed);
 			return;
 		}
-		_done += n;
+		_furthest = MAX<uint32>(_furthest, (uint32)_in->pos());
+		if (_old) {
+			uint32 oldN = _old->read(_compareBuffer, n);
+			if (_old->err() || oldN != n || memcmp(_buffer, _compareBuffer, n) || _old->size() != job.file.size) {
+				delete _old;
+				_old = nullptr;
+				if (!_in->seek(0) || !startCopy(job)) {
+					_failedFile = job.file.path;
+					finish(kCopyFailed);
+					return;
+				}
+				continue;
+			}
+		} else if (n && (_out->write(_buffer, n) != n || _out->err())) {
+			_failedFile = job.file.path;
+			finish(kCopyFailed);
+			return;
+		}
 
-		if (_in->eos() || n < kBufferSize) {
-			_out->finalize();
-			bool failed = _out->err();
+		if (_in->pos() == job.file.size) {
+			bool failed = _in->size() != job.file.size;
+			if (_out) {
+				_out->finalize();
+				failed = failed || _out->err();
+			}
 			delete _in;
+			delete _old;
 			delete _out;
 			_in = nullptr;
+			_old = nullptr;
 			_out = nullptr;
 			if (failed) {
-				_failedFile = _jobs[_next - 1].file.path;
+				_failedFile = job.file.path;
 				finish(kCopyFailed);
 				return;
 			}
+			_done += job.file.size;
+			_furthest = 0;
 		}
 	}
 
-	int percent = _total ? (int)(_done * 100 / _total) : 100;
+	int percent = _total ? (int)((_done + _furthest) * 100 / _total) : 100;
 	if (_progress->getValue() != percent) {
 		_progress->setValue(percent);
 		_progress->markAsDirty();

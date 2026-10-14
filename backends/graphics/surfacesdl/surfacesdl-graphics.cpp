@@ -177,7 +177,7 @@ SurfaceSdlGraphicsManager::SurfaceSdlGraphicsManager(SdlEventSource *sdlEventSou
 	_cursorFormat(Graphics::PixelFormat::createFormatCLUT8()),
 	_useOldSrc(false), _isHwPalette(false),
 	_overlayscreen(nullptr), _tmpscreen2(nullptr),
-	_screenChangeCount(0),
+	_screenChangeCount(0), _numDirtyRects(0),
 	_mouseSurface(nullptr), _mouseScaler(nullptr),
 	_mouseOrigSurface(nullptr), _cursorPaletteDisabled(true),
 	_cursorScaleX(0), _cursorScaleY(0),
@@ -1204,6 +1204,9 @@ void SurfaceSdlGraphicsManager::updateScreen(SDL_Rect *dirtyRectList, int actual
 }
 
 void SurfaceSdlGraphicsManager::internUpdateScreen() {
+	if (!_screen || !_hwScreen)
+		return;
+
 	SDL_Surface *srcSurf, *origSurf;
 	int height, width;
 	int scale1;

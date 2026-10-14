@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "scope": "Compact real importer results; no asset bytes, profile bytes or captured artwork.",
+  "completed_utc": "2026-10-14T08:41:33.753403+00:00",
+  "full_local_report": {
+    "path": "artifacts/validation/startup-001/summary.json",
+    "bytes": 56022,
+    "sha256": "67e3cfd769bcb8a65028a478b6b51ba549b97cdfb7bf9edc150bda2df43755c8"
+  },
+  "executable": {
+    "path": "artifacts/build/macos/Fjelltoppen.app/Contents/MacOS/fjelltoppen",
+    "bytes": 18620432,
+    "sha256": "aad1ed3b6346f7b17f77ba854652d9f45399f6476c2252469cd08cbbdbc59282"
+  },
+  "process_runs": 5,
+  "check_count": 14,
+  "passed": true,
+  "checks": {
+    "welcome_exit": true,
+    "welcome_rendered": true,
+    "welcome_no_import": true,
+    "relative_rejected_before_write": true,
+    "two_disc_import_matches_every_file": true,
+    "two_disc_import_enters_menu": true,
+    "import_default_saves_private": true,
+    "exit_after_disc_one_retains_data": true,
+    "resume_recopies_truncated_file_and_matches_every_file": true,
+    "resume_enters_menu": true,
+    "default_locations_unchanged": true,
+    "app_bundle_unchanged": true,
+    "disc_resources_unchanged": true,
+    "home_never_overridden": true
+  },
+  "copied_file_count": 207,
+  "game_file_count": 205,
+  "copied_bytes": 1028876230,
+  "game_resource_bytes": 1028863934,
+  "cases": [
+    {
+      "name": "welcome-exit",
+      "exit_code": 0,
+      "timed_out": false,
+      "entered_scenes": [],
+      "seconds": 0.566
+    },
+    {
+      "name": "relative-rejected",
+      "exit_code": 1,
+      "timed_out": false,
+      "entered_scenes": [],
+      "seconds": 0.132
+    },
+    {
+      "name": "full-import",
+      "exit_code": 0,
+      "timed_out": false,
+      "entered_scenes": [
+        "menu"
+      ],
+      "seconds": 4.813
+    },
+    {
+      "name": "resume-stage-one",
+      "exit_code": 0,
+      "timed_out": false,
+      "entered_scenes": [],
+      "seconds": 1.682
+    },
+    {
+      "name": "resume-stage-two",
+      "exit_code": 0,
+      "timed_out": false,
+      "entered_scenes": [
+        "menu"
+      ],
+      "seconds": 3.698
+    }
+  ],
+  "limitations": [
+    "Directory inputs tested; optical image parsing untested.",
+    "Exit after CD1 and restart tested; copy dialog Cancel button untested.",
+    "Truncated-file repair tested; same-size corruption remains skipped by inherited size-only resume logic."
+  ]
+}

@@ -1,0 +1,374 @@
+{
+  "schema": 1,
+  "scope": "Compact packaged-app checkpoints; original game data, saves, screenshots and logs stay ignored.",
+  "collected_utc": "2026-10-14T08:58:32.301683+00:00",
+  "full_local_report": {
+    "path": "artifacts/validation/packaged-001/report.json",
+    "bytes": 335246,
+    "sha256": "bd6e035767c66655b01039c16629a0bd3470eaec773c2979519e47beca67a2f6"
+  },
+  "installation": {
+    "path": "artifacts/validation/packaged-001/installation.json",
+    "bytes": 116013,
+    "sha256": "afd521d98db16c823c29fe42b8630f700af37b59c00910fc3fa8efe74848fedc"
+  },
+  "build_provenance": {
+    "path": "artifacts/validation/packaged-001/build-provenance.json",
+    "bytes": 20687,
+    "sha256": "264f8431f070206f608b30b9c854e47e3550d23ab37a56250a7967c72d88a2a7"
+  },
+  "executable": {
+    "path": "artifacts/build/macos/Fjelltoppen.app/Contents/MacOS/fjelltoppen",
+    "bytes": 18620432,
+    "sha256": "aad1ed3b6346f7b17f77ba854652d9f45399f6476c2252469cd08cbbdbc59282"
+  },
+  "assets": {
+    "count": 205,
+    "bytes": 1028863934,
+    "all_fingerprints_rechecked": true
+  },
+  "bounded_cases": 72,
+  "exit_zero": 72,
+  "timeouts": 0,
+  "nonblack_captures": 72,
+  "warnings": {},
+  "matrix": {
+    "cases": 58,
+    "exit_zero": 58,
+    "timeouts": 0,
+    "nonblack": 58,
+    "capture_redirects": [
+      {
+        "requested": "birthday",
+        "captured": "menu"
+      }
+    ]
+  },
+  "behavioral_check_count": 11,
+  "behavioral_checks": {
+    "real_profile_creation": {
+      "passed": true,
+      "case": "fresh-profile",
+      "name": "MacPort",
+      "birthday": "January 1",
+      "profile_import": false
+    },
+    "normal-boot": {
+      "passed": true,
+      "case": "normal-boot",
+      "entered": [
+        "logo",
+        "birthday",
+        "menu"
+      ],
+      "scene_shortcut": false
+    },
+    "normal-story-yard": {
+      "passed": true,
+      "case": "normal-story-yard",
+      "entered": [
+        "logo",
+        "birthday",
+        "menu",
+        "intro",
+        "yard"
+      ],
+      "scene_shortcut": false
+    },
+    "story-resume-yard": {
+      "passed": true,
+      "case": "story-resume-yard",
+      "entered": [
+        "menu",
+        "yard"
+      ],
+      "scene_shortcut": true
+    },
+    "default_macOS_graphics": {
+      "passed": true,
+      "case": "cocoa-default-graphics",
+      "graphics_override": false,
+      "native_audio_backend_selected": true,
+      "audio_quality": "Not assessed"
+    },
+    "x86_64_slice_runtime": {
+      "passed": true,
+      "case": "rosetta-x86-menu",
+      "host": "arm64",
+      "scope": "Rosetta on Apple Silicon; physical Intel Mac untested"
+    },
+    "normal_race_gate": {
+      "passed": true,
+      "case": "menu-race-locked",
+      "result": "Fresh profile is told to build more of Il Tempo Gigante"
+    },
+    "real_racing_acceleration": {
+      "passed": true,
+      "case": "racing-held-up",
+      "position_and_engine_speed_samples": [
+        [
+          1275,
+          1424,
+          0.0
+        ],
+        [
+          1275,
+          1424,
+          0.0
+        ],
+        [
+          1275,
+          1424,
+          0.0
+        ],
+        [
+          1275,
+          1424,
+          0.0
+        ],
+        [
+          1275,
+          1424,
+          0.0
+        ],
+        [
+          1275,
+          1424,
+          0.0
+        ],
+        [
+          1275,
+          1424,
+          0.0
+        ],
+        [
+          1275,
+          1424,
+          0.0
+        ],
+        [
+          1275,
+          1424,
+          0.6
+        ],
+        [
+          1354,
+          1424,
+          93.9
+        ],
+        [
+          1498,
+          1424,
+          194.0
+        ],
+        [
+          1698,
+          1424,
+          200.0
+        ]
+      ],
+      "scope": "Help dismissal, natural countdown and held Up; direct entry bypasses unlock, no completed lap or race finish"
+    },
+    "sliding_real_completion_and_reload": {
+      "passed": true,
+      "cases": [
+        "sliding-complete",
+        "sliding-completed-reload"
+      ],
+      "ordinary_mouse_moves": 21,
+      "persisted_solved_state": 3,
+      "highscore_record_preserved": true,
+      "scope": "One complete 3x3 picture solved through legal adjacent tile clicks; no solve or award helper"
+    },
+    "trivia_real_completion_and_reload": {
+      "passed": true,
+      "cases": [
+        "trivia-full-round",
+        "trivia-completed-reload"
+      ],
+      "completed_games": [
+        {
+          "correct": 11,
+          "questions": 32,
+          "score": 6950
+        },
+        {
+          "correct": 9,
+          "questions": 32,
+          "score": 5140
+        }
+      ],
+      "shown_questions_persisted": 71,
+      "question_count": 499,
+      "history_record_preserved": true,
+      "highscore_record_preserved": true,
+      "scope": "Ordinary repeated mouse drags, natural animations and Return for result dialogs; mixed answers. Repeated input starts another game before capture; no in-progress round resume claimed."
+    },
+    "anaglyph_activity": {
+      "passed": true,
+      "case": "anaglyph-pingpong",
+      "scope": "Chooser Return enters ping-pong activity in existing JPEG-disabled release configuration"
+    }
+  },
+  "frame_dimensions": {
+    "800x600": 68,
+    "640x480": 4
+  },
+  "interaction_cases": [
+    {
+      "name": "anaglyph-pingpong",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "anaglyph"
+      ],
+      "scene_at_capture": "anaglyph",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "cocoa-default-graphics",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "menu"
+      ],
+      "scene_at_capture": "menu",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "fresh-profile",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "menu"
+      ],
+      "scene_at_capture": "menu",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "menu-race-locked",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "menu"
+      ],
+      "scene_at_capture": "menu",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-boot",
+      "scene_shortcut": false,
+      "entered_scenes": [
+        "logo",
+        "birthday",
+        "menu"
+      ],
+      "scene_at_capture": "menu",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "normal-story-yard",
+      "scene_shortcut": false,
+      "entered_scenes": [
+        "logo",
+        "birthday",
+        "menu",
+        "intro",
+        "yard"
+      ],
+      "scene_at_capture": "yard",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "racing-held-up",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "racing"
+      ],
+      "scene_at_capture": "racing",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "rosetta-x86-menu",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "menu"
+      ],
+      "scene_at_capture": "menu",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "sliding-complete",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "sliding"
+      ],
+      "scene_at_capture": "sliding",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "sliding-completed-reload",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "sliding"
+      ],
+      "scene_at_capture": "sliding",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "sliding-observed",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "sliding"
+      ],
+      "scene_at_capture": "sliding",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "story-resume-yard",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "menu",
+        "yard"
+      ],
+      "scene_at_capture": "yard",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "trivia-completed-reload",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "gametrivia"
+      ],
+      "scene_at_capture": "gametrivia",
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "trivia-full-round",
+      "scene_shortcut": true,
+      "entered_scenes": [
+        "gametrivia"
+      ],
+      "scene_at_capture": "gametrivia",
+      "exit_code": 0,
+      "timed_out": false
+    }
+  ],
+  "limitations": [
+    "Direct scene entries bypass normal unlock gates",
+    "No claim of full campaign completion or original binary equivalence",
+    "Dummy audio in default bounded cases; native backend selection does not assess audible output",
+    "Full campaign progression, normal race unlock, completed race/tournament and broad original-equivalence remain open.",
+    "The story reload enters Menu directly before clicking Start; normal full boot to Yard is a separate case.",
+    "The trivia run completed two 32-question games, then repeated input began a third round before capture; in-progress round resume is not claimed."
+  ]
+}

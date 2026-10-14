@@ -1,0 +1,42 @@
+name: macOS port build
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos:
+    runs-on: macos-15
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Fetch the reviewed upstream baseline
+        run: git fetch --no-tags --depth=1 https://github.com/alehel/Fjelltoppen.git dbbf9d9a2463078bfe3eb8d94de68edd949b7f6f
+      - name: Test local tooling fixtures
+        run: python3 -m unittest discover -s tools/macos_port -p 'test_*.py' -v
+      - name: Check public source and local commit history
+        run: python3 tools/macos_port/public_audit.py
+      - name: Install Rosetta
+        run: sudo softwareupdate --install-rosetta --agree-to-license
+      - name: Build and inspect the universal app
+        env:
+          CODESIGN_IDENTITY: ""
+          NOTARY_PROFILE: ""
+        run: python3 tools/macos_port/build.py build
+      - name: Test synthetic importer regressions
+        run: python3 tools/macos_port/importer_regression.py --app artifacts/build/macos/Fjelltoppen.app --label ci-importer
+      - name: Upload package and sanitized manifest
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fgp-gold-macos-${{ github.sha }}
+          path: |
+            artifacts/build/macos/*.dmg
+            artifacts/build/macos/public-manifest.json
+          if-no-files-found: error
+          retention-days: 14

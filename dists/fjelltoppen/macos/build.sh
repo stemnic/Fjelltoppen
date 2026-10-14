@@ -28,6 +28,26 @@ jobs=$(sysctl -n hw.ncpu)
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 export MACOSX_DEPLOYMENT_TARGET=11.0
 
+# configure splits compiler flags, so inject path maps as quoted arguments.
+compiler_wrappers=$(mktemp -d /tmp/fjelltoppen-compiler.XXXXXX)
+trap 'rm -rf "$compiler_wrappers"' 0
+trap 'exit 1' 1 2 15
+export FJELLTOPPEN_SOURCE_ROOT="$src" FJELLTOPPEN_BUILD_ROOT="$build"
+export FJELLTOPPEN_DEVELOPER_ROOT="$(xcode-select -p)"
+cat > "$compiler_wrappers/clang" <<'EOF'
+#!/bin/sh
+if [ -n "${HOME:-}" ]; then
+	set -- "$@" "-ffile-prefix-map=$HOME=./user-root"
+fi
+exec "/usr/bin/${0##*/}" "$@" \
+	"-ffile-prefix-map=$FJELLTOPPEN_DEVELOPER_ROOT=./toolchain" \
+	"-ffile-prefix-map=$FJELLTOPPEN_SOURCE_ROOT=./src" \
+	"-ffile-prefix-map=$FJELLTOPPEN_BUILD_ROOT=./build"
+EOF
+cp "$compiler_wrappers/clang" "$compiler_wrappers/clang++"
+chmod +x "$compiler_wrappers/clang" "$compiler_wrappers/clang++"
+export PATH="$compiler_wrappers:$PATH"
+
 # build_arch <arch>: static libraries and scummvm-static for one architecture
 build_arch() {
 	arch=$1
@@ -64,10 +84,12 @@ build_arch() {
 	fi
 
 	mkdir -p "$work/scummvm"
-	(cd "$work/scummvm" && PATH="$prefix/bin:$PATH" $run "$src/configure" $SCUMMVM_CONFIGURE_FLAGS \
+	(cd "$work/scummvm" && PATH="$prefix/bin:$PATH" CXX=clang++ CXXFLAGS="$cflags" \
+		LDFLAGS="-arch $arch -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET" $run "$src/configure" $SCUMMVM_CONFIGURE_FLAGS \
 		--with-staticlib-prefix="$prefix" --with-sdl-prefix="$prefix" \
 		--with-freetype2-prefix="$prefix" --with-png-prefix="$prefix" &&
 		PATH="$prefix/bin:$PATH" $run make -j$jobs scummvm-static OSX_ZLIB=-lz)
+	lipo -verify_arch "$arch" "$work/scummvm/scummvm-static"
 }
 
 build_arch arm64
@@ -92,6 +114,7 @@ for file in scummremastered.zip scummmodern.zip scummclassic.zip gui-icons.dat s
 	cp "$src/gui/themes/$file" "$res/"
 done
 cp "$src/dists/engine-data/fonts.dat" "$src/dists/engine-data/helpdialog.zip" "$res/"
+python3 "$src/tools/macos_port/sanitize_resources.py" "$res"
 
 # For the Help menu
 cp "$src/AUTHORS" "$src/COPYRIGHT" "$src/NEWS.md" "$src/README.md" "$res/"

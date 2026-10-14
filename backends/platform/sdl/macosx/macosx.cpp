@@ -275,6 +275,9 @@ Common::Path OSystem_MacOSX::getDefaultLogFileName() {
 }
 
 Common::Path OSystem_MacOSX::getDefaultIconsPath() {
+#ifdef FJELLTOPPEN
+	return Common::Path();
+#else
 	const Common::String defaultIconsPath = getAppSupportPathMacOSX() + "/Icons";
 
 	if (!Posix::assureDirectoryExists(defaultIconsPath)) {
@@ -282,9 +285,13 @@ Common::Path OSystem_MacOSX::getDefaultIconsPath() {
 	}
 
 	return Common::Path(defaultIconsPath);
+#endif
 }
 
 Common::Path OSystem_MacOSX::getDefaultDLCsPath() {
+#ifdef FJELLTOPPEN
+	return Common::Path();
+#else
 	const Common::Path defaultDLCsPath(getAppSupportPathMacOSX() + "/DLCs");
 
 	if (!Posix::assureDirectoryExists(defaultDLCsPath.toString(Common::Path::kNativeSeparator))) {
@@ -292,6 +299,7 @@ Common::Path OSystem_MacOSX::getDefaultDLCsPath() {
 	}
 
 	return defaultDLCsPath;
+#endif
 }
 
 Common::Path OSystem_MacOSX::getScreenshotsPath() {
