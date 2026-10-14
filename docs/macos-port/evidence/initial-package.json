@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "scope": "Compact facts and fingerprints only; complete local build evidence remains ignored.",
+  "verified_utc": "2026-10-14T09:11:36.210488+00:00",
+  "upstream_repository": "https://github.com/alehel/Fjelltoppen",
+  "upstream_commit": "dbbf9d9a2463078bfe3eb8d94de68edd949b7f6f",
+  "local_branch": "macos-development",
+  "inspection_report": {
+    "path": "artifacts/build/macos/inspection-final.json",
+    "bytes": 21581,
+    "sha256": "35dcda82f0bf2661a50cf2cd8bb8ef3bc0d722d5e6caed4cc66b873f968ff8a1"
+  },
+  "build_source_checkpoint": {
+    "path": "artifacts/build/macos/build-source-checkpoint.json",
+    "bytes": 1136,
+    "sha256": "93984b5e4d077b032685bed41cc418d84f6cb6edbb16ff90542b4e9241aa14cd"
+  },
+  "source_capture_mode": "Operator adoption of an already completed, source-reviewed build; not a pre-build capture",
+  "source_inventory": {
+    "path": "artifacts/build/macos/build-source-inventory.json",
+    "bytes": 3421134,
+    "sha256": "08409efdc47835079c6fdb1aa7216959df6250e0f1466090d39d285b533825a9"
+  },
+  "source_patch": {
+    "path": "artifacts/build/macos/build-checkpoint-source.patch",
+    "bytes": 3001,
+    "sha256": "f6aff99538109812f1a9a7770d6e07bba9bb7d6e17fcc3dd98a0013190a797e0"
+  },
+  "current_source_inputs_match_build": true,
+  "compiler": {
+    "name_version": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "target": "arm64-apple-darwin27.0.0"
+  },
+  "executable": {
+    "path": "artifacts/build/macos/Fjelltoppen.app/Contents/MacOS/fjelltoppen",
+    "bytes": 18620432,
+    "sha256": "aad1ed3b6346f7b17f77ba854652d9f45399f6476c2252469cd08cbbdbc59282"
+  },
+  "disk_image": {
+    "path": "artifacts/build/macos/Fjelltoppen-0.1.0-macos.dmg",
+    "bytes": 22253771,
+    "sha256": "dae4061961215fa831fb51b51824024a19440d0f26a296ab5f447a7e76d00676"
+  },
+  "architectures": [
+    "x86_64",
+    "arm64"
+  ],
+  "macos_minimum_declared": "11.0 for both slices",
+  "inspection_exit_codes": {
+    "architectures": 0,
+    "dynamic_dependencies": 0,
+    "deployment_targets": 0,
+    "code_signature": 0,
+    "signature_details": 0,
+    "disk_image": 0
+  },
+  "dynamic_dependencies": "Apple system libraries/frameworks only; no Homebrew dependencies",
+  "support_files": [
+    "scummremastered.zip",
+    "scummmodern.zip",
+    "scummclassic.zip",
+    "gui-icons.dat",
+    "shaders.dat",
+    "translations.dat",
+    "fonts.dat",
+    "helpdialog.zip"
+  ],
+  "signature": "ad-hoc",
+  "game_data": "No original game data in the application bundle or tracked Git source.",
+  "limitations": [
+    "No Apple Developer ID notarization or public release.",
+    "Older macOS versions and separate Intel hardware untested.",
+    "Independent byte-reproducibility unproven.",
+    "Initial source checkpoint explicitly adopted after the reviewed operator build; future wrapper builds freeze inputs before compilation."
+  ],
+  "publication_status": "Historical private prototype; superseded by a rebuilt package with compiler path mappings and publication checks."
+}

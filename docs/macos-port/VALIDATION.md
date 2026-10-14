@@ -6,6 +6,47 @@ This document records checks of the independently built application in this
 repository. Results from the earlier research checkout do not automatically
 validate a new application package.
 
+## Public package and importer improvements
+
+The current package is built from source checkpoint
+`c19d4bf7f9da4a802376a2defc3e86593abb696d`.
+Its [public package manifest](evidence/package.json) contains structured facts
+without local paths or raw tool output. Compiler path mappings cover both
+architectures and dependencies; copied SVG resources lose editor filesystem
+metadata while retaining graphics and credits. Independent scans of the app,
+public manifest, mounted DMG and 610 decompressed ZIP members found no former
+personal identifiers or local home/source paths. The DMG app matches the
+standalone app byte for byte. Original game content is excluded.
+
+The [current acceptance summary](evidence/public-acceptance.json) records:
+
+- 39 passing synthetic tooling tests.
+- 14 passing synthetic importer checks across four process runs, including
+  same-size damage after two read chunks, matching-file preservation by mtime,
+  truncated files, empty files and exact chunk boundaries.
+- 14 passing real-disc startup checks across five process runs, including
+  complete two-disc import and interrupted-copy resume with exact resource
+  matches. Relative-path rejection intentionally exits with an error.
+- 20 consecutive welcome/render/exit launches, with seven passing aggregate
+  stability checks and no imports or game scenes.
+- 65 bounded game cases with no retries, timeouts or warnings, covering all
+  58 scene entries and seven normal-startup, story/reload, native Cocoa,
+  Rosetta and race-gate checks. Every captured frame is nonblack and all 205
+  copied resources were rechecked. Direct scene entry tests loading/rendering;
+  it does not establish completed gameplay. Birthday redirects to Menu for
+  the synthetic January 1 player.
+
+The first privacy-clean package exposed an inherited intermittent SurfaceSDL
+startup bug. LLDB confirmed that an uninitialized dirty-rectangle count was
+used during graphics-mode restoration before screen allocation. Initializing
+the count and deferring redraws until surfaces exist fixed the observed
+failure. Failed package reports and debugger records remain private; the
+corrected package uses a separate build/validation checkpoint.
+
+Original discs, normal user folders and `HOME` were unchanged. Test configs,
+profiles, captures and full reports remain private. Copy-dialog
+cancellation and injected source-open/read failures are not runtime-tested.
+
 ## Verified package on 14 October 2026
 
 The initial private prototype build produced `Fjelltoppen.app` and a verified
@@ -24,7 +65,7 @@ passed inspection.
 | Universal executable | 18,620,432 | `aad1ed3b6346f7b17f77ba854652d9f45399f6476c2252469cd08cbbdbc59282` |
 | Disk image | 22,253,771 | `dae4061961215fa831fb51b51824024a19440d0f26a296ab5f447a7e76d00676` |
 
-The tracked [package summary](evidence/package.json) links the full local
+The tracked [historical package summary](evidence/initial-package.json) links the full local
 inspection at `artifacts/build/macos/inspection-final.json`. It retains the
 source/configuration fingerprints, dependency hashes and build-source
 checkpoint. The original operator build finished before the current wrapper

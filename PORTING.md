@@ -51,6 +51,6 @@ Run the fixture tests without game assets:
 python3 -m unittest discover -s tools/macos_port -p 'test_*.py' -v
 ```
 
-The manual GitHub Actions workflow builds and inspects packages without original
-assets or release publication. It is available for manual runs on the existing
-fork. The local validation record identifies what actually ran.
+A manual GitHub Actions workflow is included on `macos-development`. It builds
+and inspects packages without original assets or release publication. Hosted CI
+has not been run; the local validation record identifies what actually ran.

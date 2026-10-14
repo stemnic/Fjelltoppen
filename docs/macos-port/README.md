@@ -49,8 +49,7 @@ those options and the package contents.
 ## Play
 
 The latest reviewed build has convenient copies at
-[`dist/Fjelltoppen.app`](../../dist/Fjelltoppen.app) and
-[`dist/Fjelltoppen-0.1.0-macos.dmg`](../../dist/Fjelltoppen-0.1.0-macos.dmg).
+`dist/Fjelltoppen.app` and `dist/Fjelltoppen-0.1.0-macos.dmg`.
 Open the app, or copy it from the disk image into Applications. The `dist`
 copies are a tested checkpoint; a later rebuild produces its
 updated outputs in `artifacts/build/macos`.

@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "scope": "Public aggregate acceptance only; original data, paths, profiles, frames and full local reports are excluded.",
+  "source_commit": "c19d4bf7f9da4a802376a2defc3e86593abb696d",
+  "executable_sha256": "e8a5fbc25da8e1e451cb8eff5ba94082692aa2c6210e0be4f330c4122e374638",
+  "fixture_tests": {
+    "count": 39,
+    "passed": true
+  },
+  "privacy": {
+    "distribution_files": 33,
+    "decompressed_zip_members": 610,
+    "matched_private_identifiers": 0,
+    "mounted_dmg_matches_app": true,
+    "original_game_content_bundled": false
+  },
+  "synthetic_importer": {
+    "passed": true,
+    "check_count": 14,
+    "checks": {
+      "first_import_matches_synthetic_source": true,
+      "identical_files_preserve_mtime": true,
+      "identical_files_remain_exact": true,
+      "same_size_damage_precondition": true,
+      "same_size_damage_repaired": true,
+      "repair_preserves_other_files": true,
+      "shortened_file_precondition": true,
+      "shortened_file_repaired": true,
+      "all_runs_exit_at_cd_two_prompt": true,
+      "no_game_assets_or_engine_run": true,
+      "source_fixture_unchanged": true,
+      "executable_unchanged": true,
+      "default_locations_unchanged": true,
+      "home_never_overridden": true
+    },
+    "process_runs": 4
+  },
+  "limitations": [
+    "Full campaign and completed races remain unverified.",
+    "Audio quality, physical Intel hardware and older macOS are unverified.",
+    "Copy cancellation and injected source-read failures were not exercised.",
+    "Targeted privacy scanning cannot prove arbitrary files contain no private information."
+  ],
+  "original_disc_startup": {
+    "passed": true,
+    "check_count": 14,
+    "checks": {
+      "welcome_exit": true,
+      "welcome_rendered": true,
+      "welcome_no_import": true,
+      "relative_rejected_before_write": true,
+      "two_disc_import_matches_every_file": true,
+      "two_disc_import_enters_menu": true,
+      "import_default_saves_private": true,
+      "exit_after_disc_one_retains_data": true,
+      "resume_recopies_truncated_file_and_matches_every_file": true,
+      "resume_enters_menu": true,
+      "default_locations_unchanged": true,
+      "app_bundle_unchanged": true,
+      "disc_resources_unchanged": true,
+      "home_never_overridden": true
+    },
+    "process_runs": 5,
+    "copied_file_count": 207,
+    "game_file_count": 205
+  },
+  "startup_stability": {
+    "passed": true,
+    "check_count": 7,
+    "checks": {
+      "twenty_fresh_launches": true,
+      "all_exits_zero_without_timeout": true,
+      "every_welcome_rendered": true,
+      "no_game_started_or_imported": true,
+      "home_never_overridden": true,
+      "default_locations_unchanged": true,
+      "app_bundle_unchanged": true
+    },
+    "process_runs": 20
+  },
+  "gameplay": {
+    "bounded_cases": 65,
+    "exit_zero": 65,
+    "timeouts": 0,
+    "nonblack_captures": 65,
+    "warnings": 0,
+    "matrix": {
+      "cases": 58,
+      "exit_zero": 58,
+      "timeouts": 0,
+      "nonblack": 58,
+      "capture_redirects": [
+        {
+          "requested": "birthday",
+          "captured": "menu"
+        }
+      ]
+    },
+    "behavioral_checks": {
+      "real_profile_creation": true,
+      "normal-boot": true,
+      "normal-story-yard": true,
+      "story-resume-yard": true,
+      "default_macOS_graphics": true,
+      "x86_64_slice_runtime": true,
+      "normal_race_gate": true
+    },
+    "resource_count": 205,
+    "resource_fingerprints_rechecked": true
+  }
+}

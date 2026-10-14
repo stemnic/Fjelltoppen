@@ -36,6 +36,21 @@ cached commit views. GitHub documents additional cleanup and support options
 in [removing sensitive data](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository).
 Do not publish a recovery bundle or merge old development history back in.
 
+## Reviewed cleanup on 14 October 2026
+
+The two earlier development commits contained personal Git identities and
+local paths. Their replacements start directly from the reviewed upstream
+baseline: one sanitized source commit and one documentation/evidence commit.
+Only `macos-development` is rewritten; original upstream branches, tags,
+credits and license notices are preserved. A verified recovery bundle stays
+outside this repository.
+
+The reviewed package was rebuilt with compiler path mappings and resource
+metadata cleanup. Its public facts are in
+[the package manifest](evidence/package.json); aggregate runtime results and
+their limits are in [VALIDATION.md](VALIDATION.md). Full local reports and
+the earlier prototype remain private.
+
 ## Packages
 
 Compiler file-prefix mappings prevent local source paths from entering

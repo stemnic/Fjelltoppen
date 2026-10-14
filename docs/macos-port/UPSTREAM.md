@@ -59,6 +59,13 @@ verifies each slice before combining them. On the initial Apple Silicon host,
 script therefore failed to link the x86_64 SDL dependency during configure.
 The fix retains the upstream static/universal build workflow.
 
+SurfaceSDL initializes its dirty-rectangle count and defers redraws until its
+screen surfaces exist. New packaged startup checks exposed an intermittent
+null-surface blit before any importer dialog or scene. A native debugger
+confirmed that early graphics-mode restoration read an uninitialized count.
+This is a backend startup fix; the SVG metadata cleanup preserves rendering
+content.
+
 This project adopts the existing engine instead of creating another engine
 or treating its C++ as recovered original source.
 We keep the upstream name and existing icon and preserve upstream credits.

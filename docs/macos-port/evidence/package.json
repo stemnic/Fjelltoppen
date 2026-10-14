@@ -1,72 +1,218 @@
 {
   "schema": 1,
-  "scope": "Compact facts and fingerprints only; complete local build evidence remains ignored.",
-  "verified_utc": "2026-10-14T09:11:36.210488+00:00",
-  "upstream_repository": "https://github.com/alehel/Fjelltoppen",
-  "upstream_commit": "dbbf9d9a2463078bfe3eb8d94de68edd949b7f6f",
-  "local_branch": "macos-development",
-  "inspection_report": {
-    "path": "artifacts/build/macos/inspection-final.json",
-    "bytes": 21581,
-    "sha256": "35dcda82f0bf2661a50cf2cd8bb8ef3bc0d722d5e6caed4cc66b873f968ff8a1"
+  "scope": "Sanitized package facts; full build logs and local provenance are excluded.",
+  "source": {
+    "upstream_repository": "https://github.com/alehel/Fjelltoppen",
+    "upstream_commit": "dbbf9d9a2463078bfe3eb8d94de68edd949b7f6f",
+    "commit": "c19d4bf7f9da4a802376a2defc3e86593abb696d",
+    "current_inputs_match_build": true
   },
-  "build_source_checkpoint": {
-    "path": "artifacts/build/macos/build-source-checkpoint.json",
-    "bytes": 1136,
-    "sha256": "93984b5e4d077b032685bed41cc418d84f6cb6edbb16ff90542b4e9241aa14cd"
-  },
-  "source_capture_mode": "Operator adoption of an already completed, source-reviewed build; not a pre-build capture",
-  "source_inventory": {
-    "path": "artifacts/build/macos/build-source-inventory.json",
-    "bytes": 3421134,
-    "sha256": "08409efdc47835079c6fdb1aa7216959df6250e0f1466090d39d285b533825a9"
-  },
-  "source_patch": {
-    "path": "artifacts/build/macos/build-checkpoint-source.patch",
-    "bytes": 3001,
-    "sha256": "f6aff99538109812f1a9a7770d6e07bba9bb7d6e17fcc3dd98a0013190a797e0"
-  },
-  "current_source_inputs_match_build": true,
   "compiler": {
-    "name_version": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "version": "Apple clang version 21.0.0",
     "target": "arm64-apple-darwin27.0.0"
   },
+  "application": "Fjelltoppen.app",
   "executable": {
-    "path": "artifacts/build/macos/Fjelltoppen.app/Contents/MacOS/fjelltoppen",
-    "bytes": 18620432,
-    "sha256": "aad1ed3b6346f7b17f77ba854652d9f45399f6476c2252469cd08cbbdbc59282"
+    "path": "Contents/MacOS/fjelltoppen",
+    "bytes": 18620480,
+    "sha256": "e8a5fbc25da8e1e451cb8eff5ba94082692aa2c6210e0be4f330c4122e374638"
   },
-  "disk_image": {
-    "path": "artifacts/build/macos/Fjelltoppen-0.1.0-macos.dmg",
-    "bytes": 22253771,
-    "sha256": "dae4061961215fa831fb51b51824024a19440d0f26a296ab5f447a7e76d00676"
-  },
-  "convenient_copies": {
-    "executable": {
-      "path": "dist/Fjelltoppen.app/Contents/MacOS/fjelltoppen",
-      "bytes": 18620432,
-      "sha256": "aad1ed3b6346f7b17f77ba854652d9f45399f6476c2252469cd08cbbdbc59282"
+  "application_files": [
+    {
+      "path": "Contents/Info.plist",
+      "bytes": 2125,
+      "sha256": "0080196abf73d9cec511b4d7c3265c93cdd9fd2ad16f9d8163e2a7c0e1df515c"
     },
-    "disk_image": {
-      "path": "dist/Fjelltoppen-0.1.0-macos.dmg",
-      "bytes": 22253771,
-      "sha256": "dae4061961215fa831fb51b51824024a19440d0f26a296ab5f447a7e76d00676"
+    {
+      "path": "Contents/MacOS/fjelltoppen",
+      "bytes": 18620480,
+      "sha256": "e8a5fbc25da8e1e451cb8eff5ba94082692aa2c6210e0be4f330c4122e374638"
+    },
+    {
+      "path": "Contents/PkgInfo",
+      "bytes": 8,
+      "sha256": "82502191c9484b04d685374f9879a0066069c49b8acae7a04b01d38d07e8eca0"
+    },
+    {
+      "path": "Contents/Resources/AUTHORS",
+      "bytes": 42989,
+      "sha256": "b05068396a2fedaf1c16cb4df74da9def6fba9996a5237ba9ddacbf9c9c66a65"
+    },
+    {
+      "path": "Contents/Resources/COPYRIGHT",
+      "bytes": 15302,
+      "sha256": "95c3a8ed18246d6a7135d7ba0aacd4df9a0957f7e1de8f58ec8e011d84557a6b"
+    },
+    {
+      "path": "Contents/Resources/NEWS.md",
+      "bytes": 193514,
+      "sha256": "52513cfc7ada1e1605f911ce2351338142d13b30671b3670c254253b9d736959"
+    },
+    {
+      "path": "Contents/Resources/README.md",
+      "bytes": 4879,
+      "sha256": "94b871636b05ea0b4b7e77b2ef8d090d191df795b13459166f83e33247914a14"
+    },
+    {
+      "path": "Contents/Resources/fjelltoppen.icns",
+      "bytes": 605200,
+      "sha256": "40e4dffae12e0499dd01e31d2c48bfae08989ea0c636fd8d5d7390c34a8f437a"
+    },
+    {
+      "path": "Contents/Resources/fonts.dat",
+      "bytes": 6449829,
+      "sha256": "b25946aa6ff9c7bbef9d6e5a8fa7b33cf1230fbddfaa5262e19288387c493b95"
+    },
+    {
+      "path": "Contents/Resources/gui-icons.dat",
+      "bytes": 3317222,
+      "sha256": "031e0689b47bc7e22f496a949cd7bb8abac3d9b35d131197eeb52f67a26f58b4"
+    },
+    {
+      "path": "Contents/Resources/helpdialog.zip",
+      "bytes": 207764,
+      "sha256": "9ff3c7964a63b18ffa0e9cfcf60d4d8b4a77d7a583b2e66173716a825c777f81"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-Apache",
+      "bytes": 11488,
+      "sha256": "314ca6233f2849131fc87c24cdf112aa204605051d8f17fbf5982945e34dbb67"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-BSD",
+      "bytes": 8058,
+      "sha256": "80bec7489af9bdd2e0f5467f6267f8985aaaca50e5061c9d02467e103c126628"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-BSL",
+      "bytes": 1429,
+      "sha256": "58afb430442855628fa2509cddd905ad61c12fe564731466f56554edd5344ae5"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-GLAD",
+      "bytes": 3122,
+      "sha256": "d74397819a7776231c638e73b9197a45faad8347278bdfec30a041d1cb808313"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-ISC",
+      "bytes": 967,
+      "sha256": "4bdb0a32d3ba3070ed77dc48efb5348ce647bac3a1716992fa4cc080b99a3af7"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-LGPL",
+      "bytes": 26721,
+      "sha256": "f2c0f033c76185c3c981ad458ea433ca2787ab9b6f4623cab500fc8024db0e05"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-LUA",
+      "bytes": 2035,
+      "sha256": "8e0272ae02203977f9d0312bd82fe2498f37741b51c52731b9af0d66dbde7b6a"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-MIT",
+      "bytes": 2695,
+      "sha256": "acc32538625eb6a7b2bdd43749a787efe9544400e10e5c01fb6dd91a1a60b94b"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-MKV",
+      "bytes": 1600,
+      "sha256": "cfac47baf5d584bc5458c90b33116087dd1bda638adf751f123e7d176e4ac67f"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-MPL",
+      "bytes": 16842,
+      "sha256": "c92198047ac07252eada8d895a9cbe9473504d54b28e7646b5fb053f876b9fc2"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-OFL",
+      "bytes": 5067,
+      "sha256": "a79c445b3f3061588468e44bc9fff8b8ebac169374fabb482ea7274a478b45b5"
+    },
+    {
+      "path": "Contents/Resources/licenses/COPYING-TINYGL",
+      "bytes": 1324,
+      "sha256": "f62a84ca5a9a1a6f36d63336c461b6d21902fdfa84a50969b0d9ec6c6f0b90d3"
+    },
+    {
+      "path": "Contents/Resources/licenses/CatharonLicense.txt",
+      "bytes": 5359,
+      "sha256": "372251a3ce2ecdb74e076dede2c7d0d1e16a5003c548177e9908627192dd064c"
+    },
+    {
+      "path": "Contents/Resources/scummclassic.zip",
+      "bytes": 16488,
+      "sha256": "39b823b709213006b00246e2d0c5c49f5475dc2257434fb2e860b442892e2fe1"
+    },
+    {
+      "path": "Contents/Resources/scummmodern.zip",
+      "bytes": 68063,
+      "sha256": "2cdab026d51f8677b353e154d840edb9126e288aa74aa7930f862a4e0e6b7c37"
+    },
+    {
+      "path": "Contents/Resources/scummremastered.zip",
+      "bytes": 93738,
+      "sha256": "c635d0a0eb9d4e7c699fa1816a9b8a07054c9e7f92866713bbc6b566732b217f"
+    },
+    {
+      "path": "Contents/Resources/shaders.dat",
+      "bytes": 657234,
+      "sha256": "1e7839515c92b0e55198a6c96666dcd369ac3d4efab0190a265d244fda65f9e9"
+    },
+    {
+      "path": "Contents/Resources/translations.dat",
+      "bytes": 3722762,
+      "sha256": "e4c716eab6d53c864b5f15c58815d87c638fadd091fe31a2621904a92cf5d217"
+    },
+    {
+      "path": "Contents/_CodeSignature/CodeResources",
+      "bytes": 8684,
+      "sha256": "fcb7e662a1bb73eb3fbe0d6670405931f52d5f54ad9ad9ed2092ca5556fa24f7"
     }
+  ],
+  "disk_image": {
+    "path": "Fjelltoppen-0.1.0-macos.dmg",
+    "bytes": 22255414,
+    "sha256": "552239f42e56f43da235610324684543924fc322440f0d9f79dd882681da8cf1"
   },
   "architectures": [
-    "x86_64",
-    "arm64"
+    "arm64",
+    "x86_64"
   ],
-  "macos_minimum_declared": "11.0 for both slices",
-  "inspection_exit_codes": {
-    "architectures": 0,
-    "dynamic_dependencies": 0,
-    "deployment_targets": 0,
-    "code_signature": 0,
-    "signature_details": 0,
-    "disk_image": 0
-  },
-  "dynamic_dependencies": "Apple system libraries/frameworks only; no Homebrew dependencies",
+  "macos_minimum": "11.0",
+  "sdk_versions": [
+    "27.0"
+  ],
+  "dynamic_dependencies": [
+    "/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation",
+    "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+    "/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox",
+    "/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit",
+    "/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon",
+    "/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa",
+    "/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio",
+    "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+    "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+    "/System/Library/Frameworks/CoreHaptics.framework/Versions/A/CoreHaptics",
+    "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI",
+    "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+    "/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo",
+    "/System/Library/Frameworks/ForceFeedback.framework/Versions/A/ForceFeedback",
+    "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+    "/System/Library/Frameworks/GameController.framework/Versions/A/GameController",
+    "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+    "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+    "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+    "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+    "/usr/lib/libSystem.B.dylib",
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libobjc.A.dylib",
+    "/usr/lib/libz.1.dylib"
+  ],
   "support_files": [
     "scummremastered.zip",
     "scummmodern.zip",
@@ -77,13 +223,46 @@
     "fonts.dat",
     "helpdialog.zip"
   ],
-  "signature": "ad-hoc",
-  "game_data": "No original game data in the application bundle or tracked Git source.",
-  "limitations": [
-    "No Apple Developer ID notarization or public release.",
-    "Older macOS versions and separate Intel hardware untested.",
-    "Independent byte-reproducibility unproven.",
-    "Initial source checkpoint explicitly adopted after the reviewed operator build; future wrapper builds freeze inputs before compilation."
+  "dependency_archives": [
+    {
+      "path": "SDL2-2.32.10.tar.gz",
+      "bytes": 7630262,
+      "sha256": "5f5993c530f084535c65a6879e9b26ad441169b3e25d789d83287040a9ca5165"
+    },
+    {
+      "path": "bzip2-1.0.8.tar.gz",
+      "bytes": 810029,
+      "sha256": "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269"
+    },
+    {
+      "path": "freetype-2.14.3.tar.xz",
+      "bytes": 2670220,
+      "sha256": "36bc4f1cc413335368ee656c42afca65c5a3987e8768cc28cf11ba775e785a5f"
+    },
+    {
+      "path": "libpng-1.6.59.tar.xz",
+      "bytes": 1074540,
+      "sha256": "d80dd2a38a37f803cb9b6ac7b14bd6e74ddc3b654780a8380bdf93523fdb4389"
+    }
   ],
-  "publication_status": "Historical private prototype; superseded by a rebuilt package with compiler path mappings and publication checks."
+  "zlib": "macOS system library",
+  "license": "GPL-3.0-or-later",
+  "signature": "ad-hoc",
+  "checks": {
+    "architectures": true,
+    "dynamic_dependencies": true,
+    "deployment_targets": true,
+    "code_signature": true,
+    "signature_details": true,
+    "disk_image": true,
+    "disk_image_contents": true,
+    "support_files": true,
+    "license": true,
+    "artifact_privacy": true
+  },
+  "limitations": [
+    "macOS minimum is declared; older macOS runtime support is not established.",
+    "Signature verification does not establish notarization or Gatekeeper acceptance.",
+    "Independent byte reproducibility is not established."
+  ]
 }
